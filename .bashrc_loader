@@ -1,0 +1,7 @@
+################################
+# Platform Dependent Files     #
+################################
+
+PLATFORM=$(uname -s)
+BASHRC_PLATFORM=~/.bashrc_${PLATFORM,,}
+[ -r $BASHRC_PLATFORM ] && . $BASHRC_PLATFORM

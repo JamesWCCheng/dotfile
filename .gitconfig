@@ -1,0 +1,26 @@
+[user]
+  email = jacheng@mozilla.com
+  name = James Cheng
+[color]
+  ui = auto
+
+[alias]
+lg1 = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+lg2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(bold yellow)%d%C(reset)%n''          %C(white)%s%C(reset) %C(dim white)- %an%C(reset)' --all
+lg = !"git lg1"
+hg-format-patch = !sh -c 'git format-patch -kp -U8 "$@"|tee /dev/stderr|xargs git-patch-to-hg-patch' git
+ci = commit
+rb = rebase
+import-hg-patch = !sh -c 'wget -q -O - "$@" | hg-patch-to-git-patch | git am' git
+import-hg-patch2 = !sh -c 'wget -q -O - "$@" git am' git
+[core]
+  editor = subl -n -w
+[push]
+default=matching
+[bz]
+  username = jacheng@mozilla.com
+  apikey = D0xd9LEaxpHgdsFqHujKt6jMD49B4l77iO1ry02T
+[mozreview]
+  nickname = JamesCheng
+[cinnabar]
+  helper = /Users/jacheng/Projects/git-cinnabar/git-cinnabar-helper
