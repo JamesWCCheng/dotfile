@@ -9,6 +9,7 @@ esac
 [ -r /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 [ -r ~/.bash_completion ] && . ~/.bash_completion
 
+export CLICOLOR='true'
 export EDITOR=subl
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 export PATH="$HOME/.local/bin:$HOME/.local/sbin:$PATH"
@@ -24,6 +25,10 @@ shopt -s checkwinsize
 function parse_git_branch {
    git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'
 }
-export PS1="\u@\h:\W \$(parse_git_branch)\\$ "
+
+GREEN="\[\033[0;32m\]"
+DEFAULT="\[\033[0m\]"
+export PS1="\u@\h:\W $GREEN\$(parse_git_branch)$DEFAULT\\$ "
+
 
 [ -r ~/.bashrc_loader ] && . ~/.bashrc_loader
