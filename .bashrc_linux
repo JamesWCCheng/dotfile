@@ -1,3 +1,30 @@
+################################
+# SSH-Agent                    #
+################################
+SSH_ENV="$HOME/.ssh/environment"
+
+function start_agent {
+    echo "Initialising new SSH agent..."
+    /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+    echo succeeded
+    chmod 600 "${SSH_ENV}"
+    . "${SSH_ENV}" > /dev/null
+    for pkey in ~/.ssh/id_ecdsa ~/.ssh/id_rsa
+    do
+        test -f $pkey && chmod 600 $pkey && /usr/bin/ssh-add $pkey;
+    done
+}
+
+# Source SSH settings, if applicable
+if [ -f "${SSH_ENV}" ]; then
+    . "${SSH_ENV}" > /dev/null
+    ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+        start_agent;
+    }
+else
+    start_agent;
+fi
+
 # Add global path
 export PATH="$HOME/.mozbuild/moz-git-tools:$PATH"
 export PATH="$HOME/Projects/android-studio/bin:$PATH"
