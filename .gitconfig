@@ -11,7 +11,7 @@ lg = !"git lg1"
 hg-format-patch = !sh -c 'git format-patch -kp -U8 "$@"|tee /dev/stderr|xargs git-patch-to-hg-patch' git
 ci = commit
 rb = rebase
-import-hg-patch = !sh -c 'wget -q -O - "$@" | hg-patch-to-git-patch | git am' git
+import-hg-patch = !sh -c 'wget -q -O - "$@" | hg-patch-to-git-patch | git am --reject' git
 import-hg-patch2 = !sh -c 'wget -q -O - "$@" git am' git
 [core]
   editor = subl -n -w
@@ -23,4 +23,4 @@ default=matching
 [mozreview]
   nickname = JamesCheng
 [cinnabar]
-  helper = /Users/jacheng/Projects/git-cinnabar/git-cinnabar-helper
+  helper = /home/james/Projects/git-cinnabar/git-cinnabar-helper
