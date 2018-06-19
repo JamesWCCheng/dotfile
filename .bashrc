@@ -29,6 +29,7 @@ function parse_git_branch {
 GREEN="\[\033[0;32m\]"
 DEFAULT="\[\033[0m\]"
 export PS1="\u@\h:\W $GREEN\$(parse_git_branch)$DEFAULT\\$ "
-
+#### Change terminal title
+PROMPT_COMMAND='echo -ne "\033]0;${PWD}\007"'
 
 [ -r ~/.bashrc_loader ] && . ~/.bashrc_loader
